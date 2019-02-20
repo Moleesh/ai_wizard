@@ -3,7 +3,7 @@ import { Container, Row, Col, Card, CardTitle, Button } from "reactstrap";
 import ImageDropZone from "react-image-dropzone";
 import request from "superagent";
 
-import logo from "./logo.svg";
+import logo from "./logo.jpg";
 
 class App extends Component {
   state = {
@@ -61,6 +61,7 @@ class App extends Component {
             <ImageDropZone
               anySize
               showButton
+              showDeleteButton
               height={512}
               block
               //   imageDefault={imageDefault}
