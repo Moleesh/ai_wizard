@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-dropzone-component/styles/filepicker.css';
+import 'dropzone/dist/min/dropzone.min.css';
 
 ReactDOM.render( < App / > , document.getElementById('root'));
 

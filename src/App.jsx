@@ -1,27 +1,12 @@
 import React, { Component } from "react";
-import { Container, Row, Col, Card, CardTitle, Button } from "reactstrap";
-import ImageDropZone from "react-image-dropzone";
-import request from "superagent";
+import { Container, Row, Col, Card, CardTitle } from "reactstrap";
+import DropzoneComponent from "react-dropzone-component";
 
-import logo from "./logo.jpg";
+import logo from "./logo.svg";
 
 class App extends Component {
   state = {
-    files: []
-  };
-
-  onDrop = files => {
-    const req = request.post("https://httpbin.org/post");
-    files.forEach(file => {
-      req.attach(file.name, file);
-    });
-    req.end();
-  };
-
-  onPreviewDrop = files => {
-    this.setState({
-      files: this.state.files.concat(files)
-    });
+    temp: ""
   };
 
   render() {
@@ -49,42 +34,33 @@ class App extends Component {
                 <Row className="justify-content-center font-weight-bold  h3">
                   Ai Wizard
                 </Row>
-                <Row className="justify-content-center font-italic h5">
-                  ------ Only by Aripta
-                </Row>
+                <Row className="justify-content-center font-italic h5" />
               </Col>
             </Row>
           </CardTitle>
         </Card>
         <Row>
-          <Col column sm="5">
-            <ImageDropZone
-              anySize
-              showButton
-              showDeleteButton
-              height={512}
-              block
-              //   imageDefault={imageDefault}
-              // imagePicked={image => console.log(image)}
+          <Col column sm="6">
+            <DropzoneComponent
+              config={{
+                iconFiletypes: [".jpg", ".png", ".gif"],
+                showFiletypeIcon: true,
+                postUrl: "http://127.0.0.1:5000/"
+              }}
+              eventHandlers={{
+                complete: () => {
+                  this.setState({ temp: "../imagenew.jpg" });
+                }
+              }}
+              djsConfig={{
+                addRemoveLinks: true
+              }}
+              z
             />
           </Col>
-          <Col column sm="2">
-            <Button color="success">success</Button>
-          </Col>
-          <Col column sm="5">
-            {/* {this.state.files.length > 0 && (
-              <React.Fragment>
-                <h3>Previews</h3>
-                {this.state.files.map(file => (
-                  <img
-                    alt="Preview"
-                    key={file.preview}
-                    src={file.preview}
-                    //     style={previewStyle}
-                  />
-                ))}
-              </React.Fragment>
-            )} */}
+
+          <Col column sm="6">
+            <img src={this.state.temp} alt="golf" />
           </Col>
         </Row>
       </Container>
