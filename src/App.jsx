@@ -49,7 +49,7 @@ class App extends Component {
               }}
               eventHandlers={{
                 complete: () => {
-                  this.setState({ temp: "../imagenew.jpg" });
+                  this.setState({ temp: "imagenew.jpg" });
                 }
               }}
               djsConfig={{
