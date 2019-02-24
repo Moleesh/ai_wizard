@@ -6,7 +6,7 @@ import logo from "./logo.svg";
 
 class App extends Component {
   state = {
-    temp: ""
+    temp: "../../../"
   };
 
   render() {
@@ -49,18 +49,17 @@ class App extends Component {
               }}
               eventHandlers={{
                 complete: () => {
-                  this.setState({ temp: "../imagenew.jpg" });
+                  this.setState({
+                    temp:
+                      "C:\\Users\\Moleesh\\Desktop\\ai\\ai_wizard\\imagenew.jpg"
+                  });
                 }
               }}
-              djsConfig={{
-                addRemoveLinks: true
-              }}
-              z
             />
           </Col>
 
           <Col column sm="6">
-            <img src={this.state.temp} alt="golf" />
+            <img src={require("./backend/image.jpeg")} alt="golf"  />
           </Col>
         </Row>
       </Container>

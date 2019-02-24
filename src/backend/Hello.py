@@ -1,35 +1,32 @@
 import os
-from flask import Flask, request, send_from_directory
-from werkzeug.utils import secure_filename
+from flask import Flask, request
 from imageai.Detection import ObjectDetection
 from flask_cors import CORS, cross_origin
+import tensorflow as tf
+global graph, model
+graph = tf.get_default_graph()
 
 
 app = Flask(__name__)
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
-
-UPLOAD_FOLDER = os.path.dirname(os.path.realpath(__file__))
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+execution_path = os.getcwd()
 
 
 @app.route('/', methods=['POST'])
 @cross_origin()
 def hello_world():
+    with graph.as_default():
+        file = request.files['file']
+        # file.save(os.path.join(execution_path, file.filename))
+        detector = ObjectDetection()
 
-    file = request.files['file']
- #   file.save(os.path.join(app.config['UPLOAD_FOLDER'], file.filename))
-
-    # fake user agent of Safari
-
-    execution_path = os.getcwd()
-    detector = ObjectDetection()
-    detector.setModelTypeAsRetinaNet()
-    detector.setModelPath(os.path.join(
-        execution_path, "resnet50_coco_best_v2.0.1.h5"))
-    detector.loadModel()
-    detections = detector.detectObjectsFromImage(
-        input_image=file, output_image_path=os.path.join(execution_path, "imagenew.jpg"))
+        detector.setModelTypeAsRetinaNet()
+        detector.setModelPath(os.path.join(
+            execution_path, "resnet50_coco_best_v2.0.1.h5"))
+        detector.loadModel()
+        detector.detectObjectsFromImage(
+            input_image=file, output_image_path=os.path.join(execution_path, file.filename))
 
 # for eachObject in detections:
 #     print(eachObject["name"], " : ", eachObject["percentage_probability"])
