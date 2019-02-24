@@ -49,10 +49,14 @@ class App extends Component {
               }}
               eventHandlers={{
                 complete: () => {
+<<<<<<< HEAD
                   this.setState({
                     temp:
                       "C:\\Users\\Moleesh\\Desktop\\ai\\ai_wizard\\imagenew.jpg"
                   });
+=======
+                  this.setState({ temp: "imagenew.jpg" });
+>>>>>>> 2b903bf357022ba7ad7d7d3bde04f3ac5f950c55
                 }
               }}
             />
