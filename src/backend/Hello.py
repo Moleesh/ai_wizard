@@ -43,7 +43,7 @@ def hello_world():
 @cross_origin()
 def my_view_func():
     filename = request.args.get('filename')
-    return send_file(filename, mimetype='image/gif')
+    return send_file(filename, mimetype='image/'+filename.split(".")[-1:])
 
 
 if __name__ == '__main__':

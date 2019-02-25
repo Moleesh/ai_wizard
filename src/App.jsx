@@ -12,7 +12,7 @@ class App extends Component {
 
   render() {
     return (
-      <Container fluid>
+      <Container fluid className="pt-2">
         <Card
           className="text-center w-100"
           style={{
@@ -28,11 +28,11 @@ class App extends Component {
                   alt=""
                   width="60"
                   height="60"
-                  className="d-inline-block align-top"
+                  className="d-inline-block align-top pt-4"
                 />
               </Col>
               <Col column sm="10">
-                <Row className="justify-content-center font-weight-bold  h3">
+                <Row className="justify-content-center font-weight-bold  h1 pt-4">
                   Ai Wizard
                 </Row>
                 <Row className="justify-content-center font-italic h5" />
@@ -41,6 +41,18 @@ class App extends Component {
           </CardTitle>
         </Card>
         <Row className="pt-2">
+          <Col>
+            {this.state.image ? (
+              <img
+                src={this.state.image}
+                className="img-fluid rounded mx-auto d-block"
+                alt=""
+                width="100%"
+              />
+            ) : null}
+          </Col>
+        </Row>
+        <Row className="py-2 d-flex justify-content-center">
           <Col column sm="6">
             <DropzoneComponent
               config={{
@@ -58,12 +70,6 @@ class App extends Component {
                 }
               }}
             />
-          </Col>
-
-          <Col column sm="6">
-            {this.state.image ? (
-              <img src={this.state.image} className="img-fluid" alt="" />
-            ) : null}
           </Col>
         </Row>
       </Container>
