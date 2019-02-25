@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import { Container, Row, Col, Card, CardTitle } from "reactstrap";
 import DropzoneComponent from "react-dropzone-component";
+import axios from "axios";
 
 import logo from "./logo.svg";
 
 class App extends Component {
   state = {
-    temp: "../../../"
+    image: null
   };
 
   render() {
@@ -39,7 +40,7 @@ class App extends Component {
             </Row>
           </CardTitle>
         </Card>
-        <Row>
+        <Row className="pt-2">
           <Col column sm="6">
             <DropzoneComponent
               config={{
@@ -48,22 +49,21 @@ class App extends Component {
                 postUrl: "http://127.0.0.1:5000/"
               }}
               eventHandlers={{
-                complete: () => {
-<<<<<<< HEAD
-                  this.setState({
-                    temp:
-                      "C:\\Users\\Moleesh\\Desktop\\ai\\ai_wizard\\imagenew.jpg"
-                  });
-=======
-                  this.setState({ temp: "imagenew.jpg" });
->>>>>>> 2b903bf357022ba7ad7d7d3bde04f3ac5f950c55
+                success: event => {
+                  axios
+                    .get("http://127.0.0.1:5000/?filename=" + event.name)
+                    .then(response =>
+                      this.setState({ image: response.config.url })
+                    );
                 }
               }}
             />
           </Col>
 
           <Col column sm="6">
-            <img src={require("./backend/image.jpeg")} alt="golf"  />
+            {this.state.image ? (
+              <img src={this.state.image} className="img-fluid" alt="" />
+            ) : null}
           </Col>
         </Row>
       </Container>

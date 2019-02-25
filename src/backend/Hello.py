@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request
+from flask import Flask, request, send_file
 from imageai.Detection import ObjectDetection
 from flask_cors import CORS, cross_origin
 import tensorflow as tf
@@ -37,6 +37,13 @@ def hello_world():
 
 # detections, extracted_images = detector.detectObjectsFromImage(input_image=os.path.join(
 #     execution_path, "image.jpg"), output_image_path=os.path.join(execution_path, "imagenew.jpg"), extract_detected_objects=True)
+
+
+@app.route('/', methods=['GET'])
+@cross_origin()
+def my_view_func():
+    filename = request.args.get('filename')
+    return send_file(filename, mimetype='image/gif')
 
 
 if __name__ == '__main__':
