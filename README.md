@@ -1,4 +1,4 @@
-# AI Object detection
+# Object detection
 
 ```
   -- Used React Js for frontend
